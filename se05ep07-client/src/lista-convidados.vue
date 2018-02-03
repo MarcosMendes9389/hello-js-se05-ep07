@@ -1,11 +1,11 @@
 <template>
   <md-list>
-    <!-- lista-festas.vue -->
+    <!-- lista-convidados.vue -->
     <md-subheader>
-      Lista de festas
+      Lista de convidados
     </md-subheader>
-    <md-list-item v-for="f in festas" :key="f.idfesta">
-      {{f.nomefesta}}
+    <md-list-item v-for="f in convidados" :key="f.idconvidado">
+      {{f.nomeconvidado}}
     </md-list-item>
   </md-list>
 </template>
@@ -16,26 +16,26 @@ const api = axios.create({
   baseURL: "http://127.0.0.1:3000"
 });
 module.exports = {
-  name: "ListaFestas",
+  name: "ListaConvidados",
   created() {
-    this.listfestas();
+    this.listconvidados();
   },
   data() {
     return {
-      festas: []
+      convidados: []
     };
   },
   methods: {
-    listfestas() {
+    listconvidados() {
       api
-        .get("/festa/list")
+        .get("/convidado/list")
         .then(ret => {
           if (ret.status != 200) throw ret;
-          this.festas = ret.data;
+          this.convidados = ret.data;
         })
         .catch(err => {
           console.log(err);
-          alert("Erro ao recuperar festas");
+          alert("Erro ao recuperar convidados");
         });
     }
   }

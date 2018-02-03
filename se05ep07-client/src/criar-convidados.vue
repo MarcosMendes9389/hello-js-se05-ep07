@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent="dosave">
     <md-input-container>
-      <label>Nome da festa</label>
-      <md-input v-model="festa.nomefesta" required></md-input>
+      <label>Nome da convidado</label>
+      <md-input v-model="convidado.nomeconvidado" required></md-input>
     </md-input-container>
     <md-button type="submit" class="md-primary md-raised">Salvar</md-button>
   </form>
@@ -14,20 +14,20 @@ const api = axios.create({
   baseURL: "http://127.0.0.1:3000"
 });
 module.exports = {
-  name: "CriarFesta",
-  data: _ => ({festa:{nomefesta:""}}),
+  name: "CriarConvidado",
+  data: _ => ({convidado:{nomeconvidado:""}}),
   methods: {
     dosave() {
       api
-        .post("/festa/save", this.festa)
+        .post("/convidado/save", this.convidado)
         .then(ret => {
           if (ret.status != 200) throw ret;
-          this.festas = ret.data;
-          this.$router.push("/lista-festas")
+          this.convidados = ret.data;
+          this.$router.push("/lista-convidados")
         })
         .catch(err => {
           console.log(err);
-          alert("Erro ao salvar festa");
+          alert("Erro ao salvar convidado");
         });
     }
   }
